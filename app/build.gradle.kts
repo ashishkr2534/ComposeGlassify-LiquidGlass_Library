@@ -58,7 +58,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     // build.gradle
-    implementation(libs.blurview)
-    implementation("com.github.Dimezis:BlurView:version-2.0.3")
+//    implementation(libs.blurview)
+//    implementation("com.github.Dimezis:BlurView:version-2.0.3")
 
 }
