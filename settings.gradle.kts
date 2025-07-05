@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ComposeGlassify"
 include(":app")
- 
+include(":ComposeGlassified")

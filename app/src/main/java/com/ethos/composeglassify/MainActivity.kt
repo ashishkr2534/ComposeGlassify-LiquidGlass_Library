@@ -26,6 +26,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -41,7 +42,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -49,6 +54,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ashish.composeglassified.GlassifiedCard
+import com.ethos.composeglassify.Components.LiquidCardComponent
 import com.ethos.composeglassify.ui.theme.ComposeGlassifyTheme
 
 class MainActivity : ComponentActivity() {
@@ -58,13 +65,68 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposeGlassifyTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(containerColor = Black,modifier = Modifier.fillMaxSize()
+                    ) { innerPadding ->
 //                    Greeting(
 //                        name = "Android",
 //                        modifier = Modifier.padding(innerPadding)
 //                    )
-                    MainScreen()
+//                    MainScreen()
+//                    UserScreen()
 //                    DemoGlassCard()
+                    GlassifiedCard(
+                        modifier = Modifier
+                            .fillMaxWidth(0.8f)
+//                        .width(300.dp)
+                            .height(420.dp)
+//                    gradientColors = listOf(
+//                        Color.Blue.copy(alpha = 0.1f),
+//                        Color.Cyan.copy(alpha = 0.1f)
+//                    )
+                    ) {
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+//                        verticalArrangement = Arrangement.Center,
+//                        horizontalAlignment = Alignment.CenterHorizontally
+                        )
+                        {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Image(
+                                    painter = painterResource(R.drawable.tiger_img),
+                                    contentDescription = "User Image",
+                                    modifier = Modifier.size(80.dp).clip(CircleShape)
+                                        .shadow(0.dp, CircleShape),
+                                    contentScale = ContentScale.Crop
+
+
+                                )
+
+                                Column {
+                                    Text("Ashish Kumar",
+                                        fontSize = 25.sp, color = White)
+                                    Text("Android App Developer",color = White)
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(15.dp))
+                            Row( modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.Start) {
+
+                                Text("This card is here for the user name and there profile details to" +
+                                        "be viewed and seen to public",color = White)
+
+
+                            }
+                            Text("Some new for the Android Developer.This card is here for the user name and there profile details to" +
+                                    "be viewed and seen to public",color = White)
+                            Text("Trying to create a App having the class effect for android Material 3. " +
+                                    "This card is here for the user name and there profile details to" +
+                                    "be viewed and seen to public",color = White)
+                        }
+                    }
                 }
             }
         }
@@ -312,6 +374,21 @@ fun MainScreen(modifier: Modifier =Modifier){
 
 
             Spacer(Modifier.height(20.dp))
+            LiquidCardShiny (
+                modifier = Modifier
+                    .width(300.dp)
+                    .height(180.dp)
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text("Glass Card", color = Color.White, fontSize = 18.sp)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text("With shiny edges", color = Color.White.copy(alpha = 0.7f))
+                }
+            }
+            Spacer(Modifier.height(20.dp))
 
 
             LiquidGlassCard3(
@@ -331,6 +408,9 @@ fun MainScreen(modifier: Modifier =Modifier){
                     color = Color.White
                 )
             }
+
+            Spacer(Modifier.height(600.dp))
+            UserScreen()
         }
     }
 }

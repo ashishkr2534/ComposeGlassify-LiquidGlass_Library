@@ -8,6 +8,7 @@ import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -37,11 +38,7 @@ fun LiquidCard(
     modifier: Modifier = Modifier,
     cornerRadius: Dp = 20.dp,
     blurRadius: Dp = 20.dp,
-    gradientColors: List<Color> = listOf(
-        Color(0xFFB8F1FF).copy(alpha = 0.12f),
-        Color(0xFFA39EFF).copy(alpha = 0.12f),
-        Color(0xFFFFC0CB).copy(alpha = 0.15f)
-    ),
+
     content: @Composable BoxScope.() -> Unit
 ) {
     Box(
@@ -61,13 +58,7 @@ fun LiquidCard(
                         )
                         .asComposeRenderEffect()
                 }
-//                .background(
-//                    Brush.linearGradient(
-//                        colors = gradientColors,
-//                        start = Offset.Zero,
-//                        end = Offset.Infinite
-//                    )
-//                )
+
                 .background(
                     brush = Brush.linearGradient(
                         colors = listOf(
@@ -95,3 +86,102 @@ fun LiquidCard(
         )
     }
 }
+
+@RequiresApi(Build.VERSION_CODES.S)
+@Composable
+fun LiquidCardShiny(
+    modifier: Modifier = Modifier,
+    cornerRadius: Dp = 20.dp,
+    blurRadius: Dp = 20.dp,
+    content: @Composable BoxScope.() -> Unit
+) {
+    Box(
+        modifier = modifier
+            .clip(RoundedCornerShape(cornerRadius))
+    ) {
+        // Background blur
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .graphicsLayer {
+                    renderEffect = RenderEffect
+                        .createBlurEffect(
+                            blurRadius.value,
+                            blurRadius.value,
+                            Shader.TileMode.CLAMP
+                        )
+                        .asComposeRenderEffect()
+                }
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            Color.White.copy(alpha = 0.25f),
+                            Color.White.copy(alpha = 0.05f),
+                            Color.Transparent
+                        ),
+                        start = Offset.Zero,
+                        end = Offset.Infinite
+                    )
+                )
+        )
+
+        // Soft outer glow border (glass edge effect)
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .border(
+                    width = 1.5.dp,
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color.White.copy(alpha = 0.6f),
+                            Color.White.copy(alpha = 0.2f)
+                        )
+                    ),
+                    shape = RoundedCornerShape(cornerRadius)
+                )
+        )
+
+        // Inner shine effect (radial light streaks)
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .background(
+                    brush = Brush.radialGradient(
+                        colors = listOf(
+                            Color.White.copy(alpha = 0.15f),
+                            Color.Transparent
+                        ),
+                        center = Offset.Infinite,
+                        radius = 600f
+                    )
+                )
+        )
+
+        // Optional: Diagonal reflective streak
+        Canvas(modifier = Modifier.matchParentSize()) {
+            drawLine(
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        Color.White.copy(alpha = 0.2f),
+                        Color.Transparent,
+                        Color.White.copy(alpha = 0.1f)
+                    ),
+                    start = Offset.Zero,
+                    end = Offset(size.width, size.height)
+                ),
+                strokeWidth = 3f,
+                start = Offset(0f, 0f),
+                end = Offset(size.width, size.height)
+            )
+        }
+
+        // Foreground content
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .padding(16.dp),
+            content = content
+        )
+    }
+}
+
