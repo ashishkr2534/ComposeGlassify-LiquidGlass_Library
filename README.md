@@ -3,7 +3,7 @@
 A modern and elegant library of **glassmorphic UI components** for Android 12+ built using **Jetpack Compose** and **Material 3** design principles.
 
 This library provides ready-to-use, customizable components like **BottomBar**, **Chip**, **Switch**, **Snackbar**, and **Card** with blurred backgrounds and frosted-glass effects.
-
+✨ Latest Version - 1.0.2
 ---
 
 ## 📦 Features
