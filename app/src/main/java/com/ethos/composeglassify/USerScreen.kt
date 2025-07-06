@@ -1,9 +1,10 @@
 package com.ethos.composeglassify
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,48 +24,89 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ethos.composeglassify.Components.LiquidCardComponent
-import java.nio.file.WatchEvent
+import com.ashish.composeglassified.GlassifiedAlertDialog
+import com.ashish.composeglassified.GlassifiedBottomBar
+import com.ashish.composeglassified.GlassifiedButton
+import com.ashish.composeglassified.GlassifiedChip
+import com.ashish.composeglassified.GlassifiedNavigationBarItem
+import com.ashish.composeglassified.GlassifiedSnackbarHost
+import com.ashish.composeglassified.GlassifiedSwitch
+import kotlinx.coroutines.launch
 
 /**
  * Created by Ashish Kr on 05,July,2025
  */
+@RequiresApi(Build.VERSION_CODES.S)
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun UserScreen() {
 
     val context = LocalContext.current
+    var showDialog by remember { mutableStateOf(true) }
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+
+    if (showDialog) {
+        GlassifiedAlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = {
+                Text("Delete Item", fontWeight = FontWeight.Bold, color = White)
+            },
+            text = {
+                Text("Are you sure you want to delete this item?", color = White)
+            },
+            confirmButton = {
+                GlassifiedButton(
+                    onClick = { showDialog = false }
+                ) {
+                    Text("Confirm", color = White)
+                }
+            },
+            dismissButton = {
+                GlassifiedButton(
+                    onClick = { showDialog = false },
+//                                    gradientColors = listOf(Color.Gray.copy(alpha = 0.2f))
+                ) {
+                    Text("Cancel", color = White)
+                }
+            }
+        )
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         var selectedImage by remember {
@@ -90,14 +132,17 @@ fun UserScreen() {
         )
 
 
-
-
-
         Image(painter = painterResource( imageResources[selectedImage]
         ), contentDescription = "background Image",
             modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
 
-        Scaffold(containerColor = Color.Transparent, topBar = {
+        Scaffold( snackbarHost = {
+            GlassifiedSnackbarHost(hostState = snackbarHostState)
+        },bottomBar = {
+            SampleBottomBar(selectedIndex = 0, onItemSelected = {
+
+            })
+        },containerColor = Color.Transparent, topBar = {
             CenterAlignedTopAppBar(colors = TopAppBarDefaults.topAppBarColors(Color.Transparent),
                 title = {
                     Text("User Profile")
@@ -135,6 +180,7 @@ fun UserScreen() {
 
 
 
+
                 Row {
                     Button(
                         onClick = {
@@ -169,61 +215,158 @@ fun UserScreen() {
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(10.dp))
-                LiquidCardComponent(
-                    modifier = Modifier
-                        .fillMaxWidth(0.8f)
-//                        .width(300.dp)
-                        .height(420.dp)
-//                    gradientColors = listOf(
-//                        Color.Blue.copy(alpha = 0.1f),
-//                        Color.Cyan.copy(alpha = 0.1f)
-//                    )
+                GlassifiedButton(
+                    onClick = { showDialog = !showDialog },
+//                                    gradientColors = listOf(Color.Gray.copy(alpha = 0.2f))
                 ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
+                    Text("Cancel", color = White)
+                }
+                var selected by remember { mutableStateOf(false) }
+
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    GlassifiedChip(
+                        text = "Filter Chip",
+                        selected = selected,
+                        onClick = { selected = !selected },
+                        showCheckmarkWhenSelected = true
                     )
-                    {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Image(
-                                painter = painterResource(R.drawable.tiger_img),
-                                contentDescription = "User Image",
-                                modifier = Modifier.size(80.dp).clip(CircleShape)
-                                    .shadow(0.dp, CircleShape),
-                                contentScale = ContentScale.Crop
 
+                    GlassifiedChip(
+                        text = "Assist Chip",
+                        selected = false,
+                        onClick = { /* navigate/help */ },
+                        leadingIcon = { Icon(Icons.Default.Info, contentDescription = null) }
+                    )
 
+                    GlassifiedChip(
+                        text = "Input Chip",
+                        selected = true,
+                        onClick = { /* maybe open something */ },
+                        trailingIcon = {
+                            Icon(
+                                Icons.Default.Close,
+                                contentDescription = "Clear",
+                                modifier = Modifier.size(16.dp)
                             )
+                        },
+                        onTrailingIconClick = { /* remove chip */ }
+                    )
 
-                            Column {
-                                Text("Ashish Kumar",
-                                    fontSize = 25.sp, color = selectedColor)
-                                Text("Android App Developer",color = selectedColor)
-                            }
-                        }
-
-                        Spacer(modifier = Modifier.height(15.dp))
-                        Row( modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Start) {
-
-                            Text("This card is here for the user name and there profile details to" +
-                                    "be viewed and seen to public",color = selectedColor)
-
-
-                        }
-                        Text("Some new for the Android Developer.This card is here for the user name and there profile details to" +
-                                "be viewed and seen to public",color = selectedColor)
-                        Text("Trying to create a App having the class effect for android Material 3. " +
-                                "This card is here for the user name and there profile details to" +
-                                "be viewed and seen to public",color = selectedColor)
-                    }
+                    GlassifiedChip(
+                        text = "Disabled",
+                        enabled = false,
+                        onClick = {}
+                    )
                 }
                 Spacer(modifier = Modifier.height(10.dp))
+                Button(onClick = {
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            message = "This is a glassified snackbar",
+                            actionLabel = "UNDO"
+                        )
+                    }
+                }) {
+                    Text("Show Snackbar")
+                }
+
+//                GlassifiedCardNew(
+//                    onClick = { /* Navigate or perform action */ },
+//                    elevation = 4.dp,
+//                    shape = RoundedCornerShape(20.dp)
+//                ) {
+//                    Text("Glassified Title",
+//                        style = MaterialTheme.typography.titleMedium)
+//                    Text("This card uses a blur + gradient background.")
+//                }
+
+
+                var isToggled by remember { mutableStateOf(false) }
+
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+                    GlassifiedSwitch(
+                        checked = isToggled,
+                        onCheckedChange = { isToggled = it }
+                    )
+
+                    GlassifiedSwitch(
+                        checked = isToggled,
+                        onCheckedChange = { isToggled = it },
+                        onLabel = "ON",
+                        offLabel = "OFF",
+                        thumbColor = Color.Green,
+                        uncheckedThumbColor = Color.Red,
+                        switchWidth = 60.dp
+                    )
+
+                    GlassifiedSwitch(
+                        checked = false,
+                        onCheckedChange = {},
+                        enabled = false
+                    )
+                }
+//                CustomGlassifiedCard(
+//                    modifier = Modifier
+//                        .fillMaxWidth(0.8f)
+////                        .width(300.dp)
+//                        .height(420.dp),
+//                    gradientColors = listOf(
+//                        Color.Blue.copy(alpha = 4f),
+//                        Color.Cyan.copy(alpha = 5f)
+//                    )
+//                ) {
+//                    Column(
+//                        modifier = Modifier.fillMaxSize(),
+////                        verticalArrangement = Arrangement.Center,
+////                        horizontalAlignment = Alignment.CenterHorizontally
+//                    )
+//                    {
+//                        Row(
+//                            modifier = Modifier.fillMaxWidth(),
+//                            horizontalArrangement = Arrangement.SpaceBetween
+//                        ) {
+//                            Image(
+//                                painter = painterResource(R.drawable.tiger_img),
+//                                contentDescription = "User Image",
+//                                modifier = Modifier.size(80.dp).clip(CircleShape)
+//                                    .shadow(0.dp, CircleShape),
+//                                contentScale = ContentScale.Crop
+//
+//
+//                            )
+//
+//                            Column {
+//                                Text("Ashish Kumar",
+//                                    fontSize = 25.sp, color = selectedColor)
+//                                Text("Android App Developer",color = selectedColor)
+//                            }
+//                        }
+//
+//                        Spacer(modifier = Modifier.height(15.dp))
+//                        Row( modifier = Modifier.fillMaxWidth(),
+//                            horizontalArrangement = Arrangement.Start) {
+//
+//                            Text("This card is here for the user name and there profile details to" +
+//                                    "be viewed and seen to public",color = selectedColor)
+//
+//
+//                        }
+//                        Text("Some new for the Android Developer.This card is here for the user name and there profile details to" +
+//                                "be viewed and seen to public",color = selectedColor)
+//                        Text("Trying to create a App having the class effect for android Material 3. " +
+//                                "This card is here for the user name and there profile details to" +
+//                                "be viewed and seen to public",color = selectedColor)
+//                    }
+//                }
+                Spacer(modifier = Modifier.height(10.dp))
+
+//                LiquidCardComponent(
+//                  card
+//                )
+
 //                LiquidCardComponent(
 //                    modifier = Modifier
 //                        .fillMaxWidth()
@@ -301,7 +444,8 @@ fun UserScreen() {
                 Spacer(Modifier.height(20.dp))
 
                 Row(Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween) {
+                    horizontalArrangement = Arrangement.SpaceBetween)
+                {
                     LiquidGlassButton2(
                         text = "Explore ",
                         onClick = {
@@ -387,8 +531,35 @@ fun UserScreen() {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.S)
 @Preview
 @Composable
 fun PreviewSampleScreen(){
     UserScreen()
+}
+
+@RequiresApi(Build.VERSION_CODES.S)
+@Composable
+fun SampleBottomBar(selectedIndex: Int, onItemSelected: (Int) -> Unit) {
+    GlassifiedBottomBar {
+        GlassifiedNavigationBarItem(
+            selected = selectedIndex == 0,
+            onClick = { onItemSelected(0) },
+            icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
+            label = { Text("Home") }
+        )
+        GlassifiedNavigationBarItem(
+            selected = selectedIndex == 1,
+            onClick = { onItemSelected(1) },
+            icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorite") },
+            label = { Text("Favorites") }
+        )
+        GlassifiedNavigationBarItem(
+            selected = selectedIndex == 2,
+            onClick = { onItemSelected(2) },
+            icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
+            label = { Text("Profile") },
+            alwaysShowLabel = false // Will only show when selected
+        )
+    }
 }

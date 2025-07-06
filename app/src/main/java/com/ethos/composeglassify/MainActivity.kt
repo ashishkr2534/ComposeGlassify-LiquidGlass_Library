@@ -23,39 +23,29 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
-import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ashish.composeglassified.GlassifiedCard
-import com.ethos.composeglassify.Components.LiquidCardComponent
 import com.ethos.composeglassify.ui.theme.ComposeGlassifyTheme
 
 class MainActivity : ComponentActivity() {
@@ -65,105 +55,210 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposeGlassifyTheme {
-                Scaffold(containerColor = Black,modifier = Modifier.fillMaxSize()
-                    ) { innerPadding ->
-//                    Greeting(
-//                        name = "Android",
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
+                Scaffold(
+                    containerColor = Black, modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+
 //                    MainScreen()
-//                    UserScreen()
-//                    DemoGlassCard()
-                    GlassifiedCard(
-                        modifier = Modifier
-                            .fillMaxWidth(0.8f)
-//                        .width(300.dp)
-                            .height(420.dp)
-//                    gradientColors = listOf(
-//                        Color.Blue.copy(alpha = 0.1f),
-//                        Color.Cyan.copy(alpha = 0.1f)
+                    UserScreen()
+//                    var showDialog by remember { mutableStateOf(true) }
+//
+//                    if (showDialog) {
+//                        GlassifiedAlertDialog(
+//                            onDismissRequest = { showDialog = false },
+//                            title = {
+//                                Text("Delete Item", fontWeight = FontWeight.Bold, color = White)
+//                            },
+//                            text = {
+//                                Text("Are you sure you want to delete this item?", color = White)
+//                            },
+//                            confirmButton = {
+//                                GlassifiedButton(
+//                                    onClick = { showDialog = false }
+//                                ) {
+//                                    Text("Confirm", color = White)
+//                                }
+//                            },
+//                            dismissButton = {
+//                                GlassifiedButton(
+//                                    onClick = { showDialog = false },
+////                                    gradientColors = listOf(Color.Gray.copy(alpha = 0.2f))
+//                                ) {
+//                                    Text("Cancel", color = White)
+//                                }
+//                            }
+//                        )
+//                    }
+//                    Column {
+//
+//
+//
+//                        CustomGlassifiedCard(
+//                            modifier = Modifier
+//                                .fillMaxWidth(0.8f)
+//                                .height(420.dp),
+//                            gradientColors = listOf(
+//                                Color.Transparent,
+//                                Color.White.copy(alpha = 0.25f),
+//                                Color.White.copy(alpha = 0.15f),
+//                                Color.Transparent,
+////                            Color.White.copy(alpha = 0.5f)
+//                            )
+//                        )
+//                        {
+//                            Column(
+//                                modifier = Modifier.fillMaxSize(),
+////                        verticalArrangement = Arrangement.Center,
+////                        horizontalAlignment = Alignment.CenterHorizontally
+//                            )
+//                            {
+//                                Row(
+//                                    modifier = Modifier.fillMaxWidth(),
+//                                    horizontalArrangement = Arrangement.SpaceBetween
+//                                ) {
+//                                    Image(
+//                                        painter = painterResource(R.drawable.tiger_img),
+//                                        contentDescription = "User Image",
+//                                        modifier = Modifier
+//                                            .size(80.dp)
+//                                            .clip(CircleShape)
+//                                            .shadow(0.dp, CircleShape),
+//                                        contentScale = ContentScale.Crop
+//
+//
+//                                    )
+//
+//                                    Column {
+//                                        Text(
+//                                            "Ashish Kumar",
+//                                            fontSize = 25.sp, color = Color.White
+//                                        )
+//                                        Text("Android App Developer", color = Color.White)
+//                                    }
+//                                }
+//
+//                                Spacer(modifier = Modifier.height(15.dp))
+//                                Row(
+//                                    modifier = Modifier.fillMaxWidth(),
+//                                    horizontalArrangement = Arrangement.Start
+//                                ) {
+//
+//                                    Text(
+//                                        "This card is here for the user name and there profile details to" +
+//                                                "be viewed and seen to public", color = Color.White
+//                                    )
+//
+//
+//                                }
+//                                Text(
+//                                    "Some new for the Android Developer.This card is here for the user name and there profile details to" +
+//                                            "be viewed and seen to public", color = Color.White
+//                                )
+//                                Text(
+//                                    "Trying to create a App having the class effect for android Material 3. " +
+//                                            "This card is here for the user name and there profile details to" +
+//                                            "be viewed and seen to public", color = Color.White
+//                                )
+//                            }
+//                        }
+//
+//                        GlassifiedButton(onClick = {
+//                            showDialog = !showDialog
+//                        }) {
+//                            Icon(Icons.Default.Star, contentDescription = null, tint = White)
+//                            Spacer(modifier = Modifier.width(8.dp))
+//                            Text("Glass Button", color = White)
+//                        }
+//
+//
+//                    }
+
+
+
+//                    CustomGlassifiedCard(
+//                        modifier = Modifier
+//                            .fillMaxWidth(0.8f)
+////                        .width(300.dp)
+//                            .height(420.dp)
+////                    gradientColors = listOf(
+////                        Color.Blue.copy(alpha = 0.1f),
+////                        Color.Cyan.copy(alpha = 0.1f)
+////                    )
 //                    )
-                    ) {
-                        Column(
-                            modifier = Modifier.fillMaxSize(),
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
-                        )
-                        {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween
-                            ) {
-                                Image(
-                                    painter = painterResource(R.drawable.tiger_img),
-                                    contentDescription = "User Image",
-                                    modifier = Modifier.size(80.dp).clip(CircleShape)
-                                        .shadow(0.dp, CircleShape),
-                                    contentScale = ContentScale.Crop
-
-
-                                )
-
-                                Column {
-                                    Text("Ashish Kumar",
-                                        fontSize = 25.sp, color = White)
-                                    Text("Android App Developer",color = White)
-                                }
-                            }
-
-                            Spacer(modifier = Modifier.height(15.dp))
-                            Row( modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.Start) {
-
-                                Text("This card is here for the user name and there profile details to" +
-                                        "be viewed and seen to public",color = White)
-
-
-                            }
-                            Text("Some new for the Android Developer.This card is here for the user name and there profile details to" +
-                                    "be viewed and seen to public",color = White)
-                            Text("Trying to create a App having the class effect for android Material 3. " +
-                                    "This card is here for the user name and there profile details to" +
-                                    "be viewed and seen to public",color = White)
-                        }
-                    }
+//                    {
+//                        Column(
+//                            modifier = Modifier.fillMaxSize(),
+////                        verticalArrangement = Arrangement.Center,
+////                        horizontalAlignment = Alignment.CenterHorizontally
+//                        )
+//                        {
+//                            Row(
+//                                modifier = Modifier.fillMaxWidth(),
+//                                horizontalArrangement = Arrangement.SpaceBetween
+//                            ) {
+//                                Image(
+//                                    painter = painterResource(R.drawable.tiger_img),
+//                                    contentDescription = "User Image",
+//                                    modifier = Modifier
+//                                        .size(80.dp)
+//                                        .clip(CircleShape)
+//                                        .shadow(0.dp, CircleShape),
+//                                    contentScale = ContentScale.Crop
+//
+//
+//                                )
+//
+//                                Column {
+//                                    Text(
+//                                        "Ashish Kumar",
+//                                        fontSize = 25.sp, color = White
+//                                    )
+//                                    Text("Android App Developer", color = White)
+//                                }
+//                            }
+//
+//                            Spacer(modifier = Modifier.height(15.dp))
+//                            Row(
+//                                modifier = Modifier.fillMaxWidth(),
+//                                horizontalArrangement = Arrangement.Start
+//                            ) {
+//
+//                                Text(
+//                                    "This card is here for the user name and there profile details to" +
+//                                            "be viewed and seen to public", color = White
+//                                )
+//
+//
+//                            }
+//                            Text(
+//                                "Some new for the Android Developer.This card is here for the user name and there profile details to" +
+//                                        "be viewed and seen to public", color = White
+//                            )
+//                            Text(
+//                                "Trying to create a App having the class effect for android Material 3. " +
+//                                        "This card is here for the user name and there profile details to" +
+//                                        "be viewed and seen to public", color = White
+//                            )
+//                        }
+//                    }
                 }
             }
         }
     }
 }
 
-//@Composable
-//fun Greeting(name: String, modifier: Modifier = Modifier) {
-//    Text(
-//        text = "Hello $name!",
-//        modifier = modifier
-//    )
-//}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    ComposeGlassifyTheme {
-//        Greeting("Android")
-//    }
-//}
 @RequiresApi(Build.VERSION_CODES.S)
 
 @Composable
-fun MainScreen(modifier: Modifier =Modifier){
+fun MainScreen(modifier: Modifier = Modifier) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-//            .padding(16.dp)
-    ){
+    ) {
         var selectedImage by remember {
             mutableStateOf(0)
         }
 
-//        LaunchedEffect(selectedImage) {
-//
-//        }
         val imageResources = listOf(
             R.drawable.event_img,
             R.drawable.ios_stock_1_for_iphone_x,
@@ -176,62 +271,51 @@ fun MainScreen(modifier: Modifier =Modifier){
             R.drawable.pexels_iriser_1707215
         )
 
-        Image(painter = painterResource( imageResources[selectedImage]
-        ), contentDescription = "background Image",
-            modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Crop)
+        Image(
+            painter = painterResource(
+                imageResources[selectedImage]
+            ), contentDescription = "background Image",
+            modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Crop
+        )
 
-        Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.Center) {
-//            GlassCard2New(content = {
-//                Text("Glass Card")
-//                Image(painter = painterResource(R.drawable.peacock_feather_img), contentDescription = "background Image",
-//                    modifier = Modifier.size(150.dp), contentScale = ContentScale.Crop)
-//            }
-
-//            )
-
-
-
-
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.Center
+        ) {
             var context = LocalContext.current
 
             LazyRow(contentPadding = PaddingValues(8.dp)) {
-                itemsIndexed(imageResources) { index ,imageResId ->
+                itemsIndexed(imageResources) { index, imageResId ->
                     Image(
                         painter = painterResource(id = imageResId),
                         contentDescription = "Image", // Provide a more descriptive content description if possible
-                        modifier = Modifier.clickable{
-                            selectedImage = index
-                            Toast.makeText(context, "$selectedImage", Toast.LENGTH_SHORT).show()
-                        }
-                            .size(100.dp).padding(horizontal = 4.dp),
+                        modifier = Modifier
+                            .clickable {
+                                selectedImage = index
+                                Toast.makeText(context, "$selectedImage", Toast.LENGTH_SHORT).show()
+                            }
+                            .size(100.dp)
+                            .padding(horizontal = 4.dp),
                         contentScale = ContentScale.Crop
                     )
                 }
             }
 
 
-            LiquidGlass27 (
+            LiquidGlass27(
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(),
                 content = {
                     Text("Hello Glass!", color = Color.White)
-                    Image(painter = painterResource(id = R.drawable.event_img
-                    ), contentDescription = null)
+                    Image(
+                        painter = painterResource(
+                            id = R.drawable.event_img
+                        ), contentDescription = null
+                    )
 
-//                    Row(Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.SpaceBetween) {
-//                        Button(
-//                            colors = ButtonDefaults.buttonColors(Color.Green),onClick = { /*TODO*/ }) {
-//                            Text("Save")
-//                        }
-//
-//                        Button(
-//                            colors = ButtonDefaults.buttonColors(Color.Gray),
-//                            onClick = { /*TODO*/ }) {
-//                            Text("Cancel")
-//                        }
-//                    }
                     LiquidGlassButton2(
                         text = "Check with Me",
                         onClick = {},
@@ -243,7 +327,7 @@ fun MainScreen(modifier: Modifier =Modifier){
                 }
             )
 
-            LiquidGlass26 (
+            LiquidGlass26(
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(),
@@ -252,12 +336,10 @@ fun MainScreen(modifier: Modifier =Modifier){
                     Text("Hello some random words chacklcjd Glass!", color = Color.White)
                     Text("Hello jkdc cjejckc omdn Glass!", color = Color.White)
                     Text("someyh hHello Gsgfsflass!", color = Color.White)
-//                    Image(painter = painterResource(id = R.drawable.event_img
-//                    ), contentDescription = null)
-
-                    Row(Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.SpaceEvenly) {
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                         Button(
-                            colors = ButtonDefaults.buttonColors(Color.Green),onClick = { /*TODO*/ }) {
+                            colors = ButtonDefaults.buttonColors(Color.Green),
+                            onClick = { /*TODO*/ }) {
                             Text("Save")
                         }
 
@@ -271,8 +353,10 @@ fun MainScreen(modifier: Modifier =Modifier){
                 }
             )
 
-            Row(modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween) {
+            Row(
+                modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 LiquidGlassButton2(
                     text = "Tap Me",
                     onClick = {},
@@ -303,18 +387,22 @@ fun MainScreen(modifier: Modifier =Modifier){
 //                    .width(200.dp)
 //                    .height(56.dp)
 //            )
-            LiquidGlass28 (
+            LiquidGlass28(
                 modifier = Modifier
                     .padding(16.dp)
                     .fillMaxWidth(),
                 content = {
                     Text("Hello Glass!", color = Color.White)
-                    Image(painter = painterResource(id = R.drawable.event_img
-                    ), contentDescription = null)
+                    Image(
+                        painter = painterResource(
+                            id = R.drawable.event_img
+                        ), contentDescription = null
+                    )
 
-                    Row(Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.SpaceBetween) {
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                         Button(
-                            colors = ButtonDefaults.buttonColors(Color.Green),onClick = { /*TODO*/ }) {
+                            colors = ButtonDefaults.buttonColors(Color.Green),
+                            onClick = { /*TODO*/ }) {
                             Text("Save")
                         }
 
@@ -352,8 +440,10 @@ fun MainScreen(modifier: Modifier =Modifier){
 //
 //                }
 //            )
-            Row(modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            )
             {
                 LiquidCard(
                     modifier = Modifier
@@ -365,7 +455,12 @@ fun MainScreen(modifier: Modifier =Modifier){
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text("GlassCard", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                        Text(
+                            "GlassCard",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text("This content is not blurred", color = Color.White.copy(alpha = 0.8f))
                     }
@@ -374,7 +469,7 @@ fun MainScreen(modifier: Modifier =Modifier){
 
 
             Spacer(Modifier.height(20.dp))
-            LiquidCardShiny (
+            LiquidCardShiny(
                 modifier = Modifier
                     .width(300.dp)
                     .height(180.dp)
