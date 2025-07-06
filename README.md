@@ -34,6 +34,7 @@ This library provides ready-to-use, customizable components like **BottomBar**, 
 ## 🛠️ Requirements
 
 - **Minimum SDK**: 31 (Android 12 / S)
+- **Having Good Dark background it work better
 - **Jetpack Compose BOM**: Compatible with latest stable Compose versions
 - **Material 3**: Required for theming and styling
 
@@ -47,9 +48,9 @@ For now, include the module manually in your `settings.gradle` and `build.gradle
 
 ```kotlin
 // settings.gradle.kts
-include(":glassified-ui")
+maven { url = uri("https://jitpack.io") }
 
 // app/build.gradle.kts
 dependencies {
-    implementation(project(":glassified-ui"))
+   implementation("com.github.ashishkr2534:ComposeGlassify-LiquidGlass_Library:version-number")
 }
