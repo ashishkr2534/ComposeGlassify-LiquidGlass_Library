@@ -26,11 +26,7 @@ This library provides ready-to-use, customizable components like **BottomBar**, 
 
 
 
-
-
-
 ---
-
 ## 🛠️ Requirements
 
 - **Minimum SDK**: 31 (Android 12 / S)
@@ -39,6 +35,26 @@ This library provides ready-to-use, customizable components like **BottomBar**, 
 - **Material 3**: Required for theming and styling
 
 ---
+🧩 Components
+Glassified offers a collection of modern, glassmorphism-inspired Jetpack Compose UI components. Each component is designed with customizability, visual elegance, and smooth user experience in mind.
+
+ Available Components
+🧊 GlassifiedCard — 
+A stylish frosted-glass card with elevation, blur, and shadow support. Ideal for presenting content in a clean, elegant layout.
+
+🎨 CustomGlassifiedCard — 
+
+⚠️ GlassifiedAlertDialog — 
+
+🧭 GlassifiedNavigationBar — 
+
+🔘 GlassifiedButton — 
+
+🔄 GlassifiedSwitch — 
+
+🏷️ GlassifiedChip — 
+
+🍬 GlassifiedSnackBar — 
 
 ## 🚀 Installation
 
