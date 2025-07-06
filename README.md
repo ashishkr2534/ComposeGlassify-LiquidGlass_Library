@@ -17,6 +17,7 @@ This library provides ready-to-use, customizable components like **BottomBar**, 
 - ✅ **All components offer full control & customization**
 
 - GlassifiedCard and CustomGlassifiedCard for more customizations
+  ## Screenshots
 <div style="display: flex; gap: 10px;">
   <img src="https://github.com/user-attachments/assets/68a011e6-5786-4fd9-93ff-4ec819a93207" alt="Glassified UI 1" width="300"/>
   <img src="https://github.com/user-attachments/assets/4f3905ee-2c88-43c9-a3ee-770ee70362f1" alt="Glassified UI 2" width="300"/>
