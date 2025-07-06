@@ -30,80 +30,80 @@ import androidx.compose.ui.unit.sp
 /**
  * Created by Ashish Kr on 05,July,2025
  */
-@RequiresApi(Build.VERSION_CODES.S)
-@Composable
-fun LiquidGlassButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    text: String,
-    cornerRadius: Dp = 24.dp,
-    blurRadius: Dp = 20.dp
-) {
-    Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(cornerRadius))
-            .background(Color.Transparent)
-            .graphicsLayer {
-                // Apply background blur effect
-                renderEffect = RenderEffect
-                    .createBlurEffect(
-                        blurRadius.value,
-                        blurRadius.value,
-                        Shader.TileMode.CLAMP
-                    )
-                    .asComposeRenderEffect()
-            }
-            .background(
-                brush = Brush.linearGradient(
-                    colors = listOf(
-                        Color.White.copy(alpha = 0.25f),
-                        Color.White.copy(alpha = 0.05f),
-                        Color.Transparent
-                    ),
-                    start = Offset.Zero,
-                    end = Offset.Infinite
-                )
-            )
-            .border(
-                width = 1.dp,
-                color = Color.White.copy(alpha = 0.3f),
-                shape = RoundedCornerShape(cornerRadius)
-            )
-            .clickable(onClick = onClick)
-            .padding(horizontal = 24.dp, vertical = 14.dp)
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    Brush.linearGradient(
-                        colors = listOf(
-                            Color(0xFFB8F1FF).copy(alpha = 0.6f),
-                            Color(0xFFA39EFF).copy(alpha = 0.4f),
-                            Color(0xFFFFC0CB).copy(alpha = 0.4f)
-                        ),
-                        start = Offset.Zero,
-                        end = Offset(200f, 200f)
-                    ),
-                    alpha = 0.25f
-                )
-                .clip(RoundedCornerShape(cornerRadius))
-        ) {
-            Text(
-                text = text,
-                color = Color.White,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
-    }
-}
+//@RequiresApi(Build.VERSION_CODES.S)
+//@Composable
+//fun LiquidGlassButton(
+//    onClick: () -> Unit,
+//    modifier: Modifier = Modifier,
+//    text: String,
+//    cornerRadius: Dp = 24.dp,
+//    blurRadius: Dp = 20.dp
+//) {
+//    Box(
+//        modifier = modifier
+//            .clip(RoundedCornerShape(cornerRadius))
+//            .background(Color.Transparent)
+//            .graphicsLayer {
+//                // Apply background blur effect
+//                renderEffect = RenderEffect
+//                    .createBlurEffect(
+//                        blurRadius.value,
+//                        blurRadius.value,
+//                        Shader.TileMode.CLAMP
+//                    )
+//                    .asComposeRenderEffect()
+//            }
+//            .background(
+//                brush = Brush.linearGradient(
+//                    colors = listOf(
+//                        Color.White.copy(alpha = 0.25f),
+//                        Color.White.copy(alpha = 0.05f),
+//                        Color.Transparent
+//                    ),
+//                    start = Offset.Zero,
+//                    end = Offset.Infinite
+//                )
+//            )
+//            .border(
+//                width = 1.dp,
+//                color = Color.White.copy(alpha = 0.3f),
+//                shape = RoundedCornerShape(cornerRadius)
+//            )
+//            .clickable(onClick = onClick)
+//            .padding(horizontal = 24.dp, vertical = 14.dp)
+//    ) {
+//        Box(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .background(
+//                    Brush.linearGradient(
+//                        colors = listOf(
+//                            Color(0xFFB8F1FF).copy(alpha = 0.6f),
+//                            Color(0xFFA39EFF).copy(alpha = 0.4f),
+//                            Color(0xFFFFC0CB).copy(alpha = 0.4f)
+//                        ),
+//                        start = Offset.Zero,
+//                        end = Offset(200f, 200f)
+//                    ),
+//                    alpha = 0.25f
+//                )
+//                .clip(RoundedCornerShape(cornerRadius))
+//        ) {
+//            Text(
+//                text = text,
+//                color = Color.White,
+//                fontSize = 16.sp,
+//                fontWeight = FontWeight.SemiBold,
+//                textAlign = TextAlign.Center,
+//                modifier = Modifier.align(Alignment.Center)
+//            )
+//        }
+//    }
+//}
 
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
-fun LiquidGlassButton2(
+fun LiquidGlassButton(
     onClick: () -> Unit,
     text: String,
     modifier: Modifier = Modifier,

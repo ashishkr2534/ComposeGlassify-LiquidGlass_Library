@@ -446,7 +446,7 @@ fun UserScreen() {
                 Row(Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween)
                 {
-                    LiquidGlassButton2(
+                    LiquidGlassButton(
                         text = "Explore ",
                         onClick = {
                             Toast.makeText(context, "Explore Button Clicked", Toast.LENGTH_SHORT).show()
@@ -456,7 +456,7 @@ fun UserScreen() {
                             .height(56.dp)
                     )
 
-                    LiquidGlassButton2(
+                    LiquidGlassButton(
                         text = "Apply",
                         onClick = {
                             Toast.makeText(context, "Explore Button Clicked", Toast.LENGTH_SHORT).show()
@@ -559,7 +559,7 @@ fun SampleBottomBar(selectedIndex: Int, onItemSelected: (Int) -> Unit) {
             onClick = { onItemSelected(2) },
             icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
             label = { Text("Profile") },
-            alwaysShowLabel = false // Will only show when selected
+            alwaysShowLabel = true // Will only show when selected
         )
     }
 }

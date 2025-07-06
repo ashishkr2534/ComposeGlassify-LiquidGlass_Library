@@ -46,6 +46,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ethos.composeglassify.screen.SampleUsageScreen
 import com.ethos.composeglassify.ui.theme.ComposeGlassifyTheme
 
 class MainActivity : ComponentActivity() {
@@ -59,8 +60,9 @@ class MainActivity : ComponentActivity() {
                     containerColor = Black, modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
 
+                    SampleUsageScreen()
 //                    MainScreen()
-                    UserScreen()
+//                    UserScreen()
 //                    var showDialog by remember { mutableStateOf(true) }
 //
 //                    if (showDialog) {
@@ -316,7 +318,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
                         ), contentDescription = null
                     )
 
-                    LiquidGlassButton2(
+                    LiquidGlassButton(
                         text = "Check with Me",
                         onClick = {},
                         modifier = Modifier
@@ -357,14 +359,14 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                LiquidGlassButton2(
+                LiquidGlassButton(
                     text = "Tap Me",
                     onClick = {},
                     modifier = Modifier
                         .width(200.dp)
                         .height(56.dp)
                 )
-                LiquidGlassButton2(
+                LiquidGlassButton(
                     text = "Close",
                     onClick = {},
                     modifier = Modifier

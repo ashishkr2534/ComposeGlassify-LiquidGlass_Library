@@ -149,107 +149,107 @@ fun GlassifiedAlertDialog(
 }
 
 
-@RequiresApi(Build.VERSION_CODES.S)
-@Composable
-fun GlassifiedAlertDialog2(
-    onDismissRequest: () -> Unit,
-    modifier: Modifier = Modifier,
-    cornerRadius: Dp = 24.dp,
-    blurRadius: Dp = 20.dp,
-    gradientColors: List<Color> = listOf(
-        Color.White.copy(alpha = 0.25f),
-        Color.White.copy(alpha = 0.05f),
-        Color.Transparent
-    ),
-    gradientStart: Offset = Offset.Zero,
-    gradientEnd: Offset = Offset.Infinite,
-    borderColor: Color = Color.White.copy(alpha = 0.3f),
-    borderWidth: Dp = 1.dp,
-    title: (@Composable () -> Unit)? = null,
-    text: (@Composable () -> Unit)? = null,
-    confirmButton: @Composable () -> Unit,
-    dismissButton: (@Composable () -> Unit)? = null,
-    shape: Shape = RoundedCornerShape(cornerRadius),
-    tonalElevation: Dp = 0.dp,
-    contentPadding: PaddingValues = PaddingValues(24.dp)
-) {
-    val cornerShape = RoundedCornerShape(cornerRadius)
-
-    Dialog(onDismissRequest = onDismissRequest) {
-        Box(
-            modifier = modifier
-                .padding(16.dp)
-                .clip(cornerShape)
-        ) {
-            // Glass Blur + Gradient + Border
-            Box(
-                modifier = Modifier
-                    .matchParentSize()
-                    .graphicsLayer {
-                        renderEffect = RenderEffect
-                            .createBlurEffect(
-                                blurRadius.value,
-                                blurRadius.value,
-                                Shader.TileMode.CLAMP
-                            )
-                            .asComposeRenderEffect()
-                    }
-                    .background(
-                        brush = Brush.linearGradient(
-                            colors = gradientColors,
-                            start = gradientStart,
-                            end = gradientEnd
-                        ),
-                        shape = cornerShape
-                    )
-                    .border(
-                        width = borderWidth,
-                        color = borderColor,
-                        shape = cornerShape
-                    )
-            )
-
-            // Foreground Transparent Surface (like Button)
-            Surface(
-                shape = cornerShape,
-                tonalElevation = tonalElevation,
-                color = Color.Transparent,
-                modifier = Modifier
-                    .clip(cornerShape)
-                    .padding(contentPadding)
-            ) {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    title?.let {
-                        ProvideTextStyle(MaterialTheme.typography.titleLarge.copy(
-                            color = LocalContentColor.current.copy(alpha = 1f)
-                        )) {
-                            it()
-                        }
-                    }
-
-                    text?.let {
-                        ProvideTextStyle(MaterialTheme.typography.bodyMedium.copy(
-                            color = LocalContentColor.current.copy(alpha = 0.9f)
-                        )) {
-                            it()
-                        }
-                    }
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 8.dp),
-                        horizontalArrangement = Arrangement.End
-                    ) {
-                        dismissButton?.invoke()
-                        Spacer(modifier = Modifier.width(8.dp))
-                        confirmButton()
-                    }
-                }
-            }
-        }
-    }
-}
+//@RequiresApi(Build.VERSION_CODES.S)
+//@Composable
+//fun GlassifiedAlertDialog2(
+//    onDismissRequest: () -> Unit,
+//    modifier: Modifier = Modifier,
+//    cornerRadius: Dp = 24.dp,
+//    blurRadius: Dp = 20.dp,
+//    gradientColors: List<Color> = listOf(
+//        Color.White.copy(alpha = 0.25f),
+//        Color.White.copy(alpha = 0.05f),
+//        Color.Transparent
+//    ),
+//    gradientStart: Offset = Offset.Zero,
+//    gradientEnd: Offset = Offset.Infinite,
+//    borderColor: Color = Color.White.copy(alpha = 0.3f),
+//    borderWidth: Dp = 1.dp,
+//    title: (@Composable () -> Unit)? = null,
+//    text: (@Composable () -> Unit)? = null,
+//    confirmButton: @Composable () -> Unit,
+//    dismissButton: (@Composable () -> Unit)? = null,
+//    shape: Shape = RoundedCornerShape(cornerRadius),
+//    tonalElevation: Dp = 0.dp,
+//    contentPadding: PaddingValues = PaddingValues(24.dp)
+//) {
+//    val cornerShape = RoundedCornerShape(cornerRadius)
+//
+//    Dialog(onDismissRequest = onDismissRequest) {
+//        Box(
+//            modifier = modifier
+//                .padding(16.dp)
+//                .clip(cornerShape)
+//        ) {
+//            // Glass Blur + Gradient + Border
+//            Box(
+//                modifier = Modifier
+//                    .matchParentSize()
+//                    .graphicsLayer {
+//                        renderEffect = RenderEffect
+//                            .createBlurEffect(
+//                                blurRadius.value,
+//                                blurRadius.value,
+//                                Shader.TileMode.CLAMP
+//                            )
+//                            .asComposeRenderEffect()
+//                    }
+//                    .background(
+//                        brush = Brush.linearGradient(
+//                            colors = gradientColors,
+//                            start = gradientStart,
+//                            end = gradientEnd
+//                        ),
+//                        shape = cornerShape
+//                    )
+//                    .border(
+//                        width = borderWidth,
+//                        color = borderColor,
+//                        shape = cornerShape
+//                    )
+//            )
+//
+//            // Foreground Transparent Surface (like Button)
+//            Surface(
+//                shape = cornerShape,
+//                tonalElevation = tonalElevation,
+//                color = Color.Transparent,
+//                modifier = Modifier
+//                    .clip(cornerShape)
+//                    .padding(contentPadding)
+//            ) {
+//                Column(
+//                    verticalArrangement = Arrangement.spacedBy(16.dp),
+//                    horizontalAlignment = Alignment.Start
+//                ) {
+//                    title?.let {
+//                        ProvideTextStyle(MaterialTheme.typography.titleLarge.copy(
+//                            color = LocalContentColor.current.copy(alpha = 1f)
+//                        )) {
+//                            it()
+//                        }
+//                    }
+//
+//                    text?.let {
+//                        ProvideTextStyle(MaterialTheme.typography.bodyMedium.copy(
+//                            color = LocalContentColor.current.copy(alpha = 0.9f)
+//                        )) {
+//                            it()
+//                        }
+//                    }
+//
+//                    Row(
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .padding(top = 8.dp),
+//                        horizontalArrangement = Arrangement.End
+//                    ) {
+//                        dismissButton?.invoke()
+//                        Spacer(modifier = Modifier.width(8.dp))
+//                        confirmButton()
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}

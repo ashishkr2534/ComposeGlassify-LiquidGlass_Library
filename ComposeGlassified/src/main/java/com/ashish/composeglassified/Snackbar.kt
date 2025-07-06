@@ -197,7 +197,8 @@ fun GlassifiedSnackbarHost(
         hostState = hostState,
         modifier = modifier,
         snackbar = { data ->
-            GlassifiedSnackbar(snackbarData = data)
+            GlassifiedSnackbar(
+                textColor = Color.White, snackbarData = data)
         }
     )
 }
